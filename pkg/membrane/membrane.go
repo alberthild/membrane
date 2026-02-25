@@ -52,6 +52,15 @@ func New(cfg *Config) (*Membrane, error) {
 	classifier := ingestion.NewClassifier()
 	policyDefaults := ingestion.DefaultPolicyDefaults()
 	policyDefaults.Sensitivity = schema.Sensitivity(cfg.DefaultSensitivity)
+	if cfg.EpisodicHalfLifeSeconds > 0 {
+		policyDefaults.EpisodicHalfLifeSeconds = cfg.EpisodicHalfLifeSeconds
+	}
+	if cfg.SemanticHalfLifeSeconds > 0 {
+		policyDefaults.SemanticHalfLifeSeconds = cfg.SemanticHalfLifeSeconds
+	}
+	if cfg.WorkingHalfLifeSeconds > 0 {
+		policyDefaults.WorkingHalfLifeSeconds = cfg.WorkingHalfLifeSeconds
+	}
 	policyEngine := ingestion.NewPolicyEngine(policyDefaults)
 	ingestionSvc := ingestion.NewService(store, classifier, policyEngine)
 

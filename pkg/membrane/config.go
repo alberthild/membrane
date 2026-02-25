@@ -52,6 +52,18 @@ type Config struct {
 	// RateLimitPerSecond is the maximum requests per second per client.
 	// 0 means no rate limiting. Default: 100.
 	RateLimitPerSecond int `yaml:"rate_limit_per_second"`
+
+	// EpisodicHalfLifeSeconds overrides the decay half-life for episodic memories.
+	// Default: 3600 (1 hour). Recommended: 604800 (7 days) for persistent agents.
+	EpisodicHalfLifeSeconds int64 `yaml:"episodic_half_life_seconds"`
+
+	// SemanticHalfLifeSeconds overrides the decay half-life for semantic memories.
+	// Default: 2592000 (30 days).
+	SemanticHalfLifeSeconds int64 `yaml:"semantic_half_life_seconds"`
+
+	// WorkingHalfLifeSeconds overrides the decay half-life for working memories.
+	// Default: 86400 (1 day).
+	WorkingHalfLifeSeconds int64 `yaml:"working_half_life_seconds"`
 }
 
 // DefaultConfig returns a Config populated with sensible defaults.
